@@ -29,7 +29,7 @@ let scrape = async () => {
 scrape().then((cotasPorEstados) => {
     var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:8080/api/despesas/cota/total-disponivel', true);
+    xhr.open("POST", 'http://localhost:8080/api/despesas/cota/total-estado', true);
     
     xhr.setRequestHeader("Content-Type", "application/json");
     
