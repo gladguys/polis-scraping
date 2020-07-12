@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer')
-let scrape = async () => {
+
+module.exports = async (politicoId) => {
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('https://www.camara.leg.br/transparencia/gastos-parlamentares?legislatura=56&ano=2020&mes=&por=deputado&deputado=107283&uf=&partido=');
+  await page.goto('https://www.camara.leg.br/transparencia/gastos-parlamentares?legislatura=56&ano=2020&mes=&por=deputado&deputado='+politicoId+'&uf=&partido=');
   
   const result = await page.evaluate(() => {
     
@@ -25,9 +26,7 @@ let scrape = async () => {
     return infos;
   })
   
-  browser.close()
-  return result
+  browser.close();
+  return result;
 };
-scrape(process.argv.slice(2)).then((infos) => {
-    console.log(infos)
-});
+
