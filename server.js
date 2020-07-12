@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var scrapeGastoTipoCotas = require('./despesa_por_cotas');
 var scrapeDespesaSecretarios = require('./despesas_secretarios');
+var scrapeCotasEstados = require('./cotas_estado');
 
 app.get('/', function (req, res) {
    res.send('Hello World');
@@ -17,9 +18,14 @@ app.get('/politicos/:politicoId/gastos-cota', async (req, res) => {
     res.send(despesasSecretarios);
  });
 
+ app.get('/cotas/cota-estados', async (req, res) => {
+   const cotasEstados = await scrapeCotasEstados();
+   res.send(cotasEstados);
+});
+
 var server = app.listen(8081, function () {
    var host = server.address().address
    var port = server.address().port
    
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log('Polis Scraping escutando em http://%s:%s', host, port)
 })
