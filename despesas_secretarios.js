@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer')
 
 module.exports =  async (idDeputado) => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://www.camara.leg.br/deputados/'+idDeputado+'/verba-gabinete?ano=2020')
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://www.camara.leg.br/deputados/'+idDeputado+'/verba-gabinete?ano=2020');
   
   const result = await page.evaluate(() => {
     var table = document.getElementsByClassName('table')[0];
@@ -20,11 +20,10 @@ module.exports =  async (idDeputado) => {
             'valorGasto': valorGasto
         });
     }
-
     return gastos;
-  })
+  });
   
-  browser.close()
-  return result
+  browser.close();
+  return result;
 };
 
