@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
 var scrapeGastoTipoCotas = require('./despesa_por_cotas');
 var scrapeDespesaSecretarios = require('./despesas_secretarios');
 
