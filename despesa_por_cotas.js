@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer')
 
 module.exports = async (politicoId) => {
+  console.log("politico: " + politicoId);
   const browser = await puppeteer.launch({
     args: [
       '--no-sandbox',
@@ -9,6 +10,7 @@ module.exports = async (politicoId) => {
   });
   const page = await browser.newPage();
   await page.goto('https://www.camara.leg.br/transparencia/gastos-parlamentares?legislatura=56&ano=2020&mes=&por=deputado&deputado='+politicoId+'&uf=&partido=');
+  await page.waitForSelector('#js-tipo-despesa-chart',{timeout:3000}).catch(() => console.log('Não foi possivel achar informação necessaria.'));
   
   const result = await page.evaluate(() => {
     const importantContent = document.getElementById('js-tipo-despesa-chart');
@@ -24,7 +26,6 @@ module.exports = async (politicoId) => {
         };
         infos.push(info);
     }
-
     return infos;
   })
   
