@@ -20,7 +20,7 @@ app.get('/politicos/:politicoId/gastos-cota', async (req, res) => {
 
  app.get('/cotas/cota-estados', async (req, res) => {
    const cotasEstados = await scrapeCotasEstados();
-   res.send(cotasEstados);
+   res.send({'cotasEstados':cotasEstados});
 });
 
 var server = app.listen(8081, function () {
