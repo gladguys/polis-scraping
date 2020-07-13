@@ -1,7 +1,12 @@
 const puppeteer = require('puppeteer')
 
 module.exports =  async (idDeputado) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  });
   const page = await browser.newPage();
   await page.goto('https://www.camara.leg.br/deputados/'+idDeputado+'/verba-gabinete?ano=2020');
   
