@@ -23,6 +23,6 @@ app.get('/politicos/:politicoId/gastos-cota', async (req, res) => {
    res.send({'cotasEstados':cotasEstados});
 });
 
-var server = app.listen(8081, function () {
+var server = app.listen(process.env.PORT || 5000, function () {
    console.log('Polis Scraping escutando...')
-})
+});
