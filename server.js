@@ -26,6 +26,5 @@ app.get('/politicos/:politicoId/gastos-cota', async (req, res) => {
 var server = app.listen(8081, function () {
    var host = server.address().address
    var port = server.address().port
-   
    console.log('Polis Scraping escutando em http://%s:%s', host, port)
 })
