@@ -15,7 +15,6 @@
     "puppeteer": "^3.0.4",
     "xmlhttprequest": "^1.8.0"
   },
-
   "engines": {
     "node": "10.x"
   }
