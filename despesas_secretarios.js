@@ -1,12 +1,16 @@
 const puppeteer = require('puppeteer')
-let scrape = async (idDeputado) => {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://www.camara.leg.br/deputados/'+idDeputado+'/verba-gabinete?ano=2020')
+
+module.exports =  async (idDeputado) => {
+  const browser = await puppeteer.launch({
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+    ],
+  });
+  const page = await browser.newPage();
+  await page.goto('https://www.camara.leg.br/deputados/'+idDeputado+'/verba-gabinete?ano=2020');
   
   const result = await page.evaluate(() => {
-     
-
     var table = document.getElementsByClassName('table')[0];
     const valores = table.getElementsByTagName('tr');
     let gastos = [];
@@ -21,15 +25,10 @@ let scrape = async (idDeputado) => {
             'valorGasto': valorGasto
         });
     }
-
     return gastos;
-  })
+  });
   
-  browser.close()
-  return result
+  browser.close();
+  return result;
 };
-
-scrape(process.argv.slice(2)).then((value) => {
-    console.log(value)
-});
 
