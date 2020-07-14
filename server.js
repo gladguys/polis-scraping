@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/politicos/:politicoId/gastos-cota', async (req, res) => {
-    const gastosCotas = await scrapeGastoTipoCotas(req.params.politicoId);
+    const gastosCotas = await scrapeGastoTipoCotas(req.params.politicoId, req.query.ano);
     res.send(gastosCotas);
  });
 
